@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  etcd:
+    image: registry.cn-beijing.aliyuncs.com/k0s/etcd:3-debian-10
+    container_name: etcd
+    network_mode: host
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+    volumes:
+      - etcd_data:/bitnami/etcd
+volumes:
+  etcd_data:
+    driver: local

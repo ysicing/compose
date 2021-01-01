@@ -1,0 +1,44 @@
+version: '2.1'
+
+services:
+  mariadb:
+    image: registry.cn-beijing.aliyuncs.com/k0s/mariadb:10.5-debian-10
+    container_name: mariadb
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'mariadb_data:/bitnami/mariadb'
+    environment:
+      - MARIADB_ROOT_PASSWORD=12345678
+      - MARIADB_USER=ergo
+      - MARIADB_PASSWORD=12345678
+      - MARIADB_DATABASE=ergo
+    healthcheck:
+      test: ['CMD', '/opt/bitnami/scripts/mariadb/healthcheck.sh']
+      interval: 15s
+      timeout: 5s
+      retries: 6
+
+  mysqld-exporter:
+    image: registry.cn-beijing.aliyuncs.com/k0s/mysqld-exporter:0.12.1-debian-10-r289
+    container_name: mysqld-exporter
+    depends_on:
+      - mariadb
+    ports:
+      - 9104:9104
+    environment:
+      - DATA_SOURCE_NAME=root:12345678@(mariadb:3306)/
+
+  adminer:
+    image: registry.cn-beijing.aliyuncs.com/k0s/adminer
+    container_name: adminer
+    depends_on:
+      - mariadb
+    ports:
+      - '18080:8080'
+
+volumes:
+  mysql_data:
+    driver: local
+  mariadb_data:
+    driver: local
