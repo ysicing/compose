@@ -8,8 +8,8 @@ services:
       - REDIS_PASSWORD=ookeVeivahkaeziech3r
       - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
     network_mode: host  
-    ports:
-      - '6379:6379'
+#     ports:
+#       - '6379:6379'
     volumes:
       - 'redis_data:/bitnami/redis/data'
 
@@ -19,8 +19,8 @@ services:
     environment:
       - REDIS_ADDR=redis://127.0.0.1:6379
       - REDIS_PASSWORD=ookeVeivahkaeziech3r
-    ports:
-      - 9121:9121 
+#     ports:
+#       - 9121:9121 
     network_mode: host  
 
 volumes:
