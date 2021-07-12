@@ -6,18 +6,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Consul
-        run: docker compose up -d -f consul/docker-compose.yml
+        run: docker-compose -f consul/docker-compose.yml up -d 
       - name: Etcd
-        run: docker compose up -d -f etcd/docker-compose.yml
+        run: docker-compose -f etcd/docker-compose.yml up -d 
       - name: Minio
-        run: docker compose up -d -f minio/docker-compose.yml
+        run: docker-compose -f minio/docker-compose.yml up -d 
       - name: MongoDB
-        run: docker compose up -d -f mongodb/docker-compose.yml
+        run: docker-compose -f mongodb/docker-compose.yml up -d 
       - name: Mysql
-        run: docker compose up -d -f mysql/docker-compose.yml
+        run: docker-compose -f mysql/docker-compose.yml up -d 
       - name: redis
-        run: docker compose up -d -f redis/docker-compose.yml
+        run: docker-compose -f redis/docker-compose.yml up -d 
       - name: prometheus
-        run: docker compose up -d -f prometheus/docker-compose.yml
+        run: docker-compose -f prometheus/docker-compose.yml up -d 
       - name: check
         run: docker ps -a
