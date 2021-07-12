@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  mongodb:
+    image: registry.cn-beijing.aliyuncs.com/k7scn/mongodb:4.4-debian-10
+    container_name: mongodb
+    environment:
+      - MONGODB_ROOT_PASSWORD=rootPassword
+      - MONGODB_USERNAME=ergo
+      - MONGODB_PASSWORD=ergoPassword
+      - MONGODB_DATABASE=ergo
+    network_mode: host  
+#     ports:
+#       - '27017:27017'
+    volumes:
+      - 'mongodb_data:/bitnami/mongodb'
+
+  redis-exporter:
+    container_name: redis-exporter
+    image: registry.cn-beijing.aliyuncs.com/k7scn/mongodb-exporter:0-debian-10
+    environment:
+      - MONGODB_URI=mongodb://root:rootPassword@127.0.0.1:27017/admin?ssl=false
+#     ports:
+#       - 9216:9216 
+    network_mode: host  
+
+volumes:
+  mongodb_data:
+    driver: local

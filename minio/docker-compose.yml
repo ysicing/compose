@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  minio:
+    image: registry.cn-beijing.aliyuncs.com/k7scn/minio:2021
+    container_name: minio
+    environment:
+      - MINIO_ACCESS_KEY=root
+      - MINIO_SECRET_KEY=rootPassword
+      - MINIO_PROMETHEUS_AUTH_TYPE=public # https://docs.min.io/docs/how-to-monitor-minio-using-prometheus.html#4-update-scrapeconfigs-section-in-prometheusyml
+    # network_mode: host  
+    ports:
+      - '9001:9000'
+    volumes:
+      - 'minio_data:/data'
+
+volumes:
+  minio_data:
+    driver: local
