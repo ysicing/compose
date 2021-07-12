@@ -1,0 +1,23 @@
+name: docker-compose-actions-workflow
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Consul
+        run: docker compose up -d -f consul/docker-compose.yml
+      - name: Etcd
+        run: docker compose up -d -f etcd/docker-compose.yml
+      - name: Minio
+        run: docker compose up -d -f minio/docker-compose.yml
+      - name: MongoDB
+        run: docker compose up -d -f mongodb/docker-compose.yml
+      - name: Mysql
+        run: docker compose up -d -f mysql/docker-compose.yml
+      - name: redis
+        run: docker compose up -d -f redis/docker-compose.yml
+      - name: prometheus
+        run: docker compose up -d -f prometheus/docker-compose.yml
+      - name: check
+        run: docker ps -a
